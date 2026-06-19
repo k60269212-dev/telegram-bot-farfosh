@@ -1,9 +1,9 @@
-# البيئة
+# Environment
 .env
 .env.local
 .env.*.local
 
-# ملفات Python
+# Python files
 __pycache__/
 *.py[cod]
 *$py.class
@@ -27,6 +27,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+PIPFILE.lock
 
 # IDE
 .vscode/
@@ -38,3 +39,16 @@ wheels/
 
 # Logs
 *.log
+bot.log
+
+# Docker
+.dockerignore
+.docker/
+
+# Cache
+.cache/
+*.cache
+
+# OS
+Thumbs.db
+.directory

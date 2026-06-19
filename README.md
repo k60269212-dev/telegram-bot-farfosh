@@ -1,193 +1,184 @@
-# 🤖 بوت تيليجرام - تحميل الفيديوهات والصوتيات
+# FarFosh Bot - Video Downloader 🎬
 
-**مطور البوت:** كريم 👨‍💻
+A powerful Telegram bot for downloading videos and audio from multiple platforms.
 
-## 📋 الميزات
+## Features ✨
 
-✅ تحميل فيديوهات من **يوتيوب** (مع حد أقصى 30 دقيقة)  
-✅ البحث عن فيديوهات يوتيوب بالنص أو الرابط المباشر  
-✅ تحميل ملفات صوتية من يوتيوب (MP3)  
-✅ تحميل من **تيك توك** 📱  
-✅ تحميل من **انستغرام** 📸  
-✅ تحميل من **تويتر** 𝕏  
-✅ واجهة تفاعلية مع أزرار سهلة الاستخدام  
+- 📺 **YouTube**: Download videos or extract audio (MP3)
+- 🎵 **TikTok**: Download TikTok videos
+- 📸 **Instagram**: Download Instagram posts and reels
+- 𝕏 **Twitter**: Download Twitter videos
+- 🎯 Smart search for YouTube videos
+- ⚡ Fast and efficient downloads
+- 🛡️ Secure token handling
+- 🗑️ Automatic file cleanup
 
----
+## Requirements 📋
 
-## 🚀 التثبيت والتشغيل
-
-### المتطلبات
 - Python 3.11+
-- Docker و Docker Compose (اختياري)
 - FFmpeg
-- توكن بوت Telegram من [BotFather](https://t.me/botfather)
+- Docker (optional)
+- Valid Telegram Bot Token from [@BotFather](https://t.me/BotFather)
 
-### الطريقة 1: التشغيل المحلي
+## Installation 🚀
 
+### Option 1: Local Installation
+
+1. Clone the repository:
 ```bash
-# 1. استنساخ المستودع
 git clone https://github.com/k60269212-dev/telegram-bot-farfosh.git
 cd telegram-bot-farfosh
+```
 
-# 2. إنشاء ملف .env
-cp .env.example .env
+2. Create virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-# 3. تحرير .env وإضافة التوكن الخاص بك
-# (أفتح الملف وضع توكنك)
-
-# 4. تثبيت المكتبات
+3. Install dependencies:
+```bash
 pip install -r requirements.txt
+```
 
-# 5. تثبيت FFmpeg
-# على Linux:
-sudo apt-get install ffmpeg
+4. Create `.env` file:
+```bash
+cp .env.example .env
+# Edit .env and add your BOT_TOKEN
+```
 
-# على macOS:
-brew install ffmpeg
-
-# على Windows:
-choco install ffmpeg
-
-# 6. تشغيل البوت
+5. Run the bot:
+```bash
 python bot.py
 ```
 
-### الطريقة 2: التشغيل مع Docker
+### Option 2: Docker Installation
 
+1. Create `.env` file:
 ```bash
-# 1. استنساخ المستودع
-git clone https://github.com/k60269212-dev/telegram-bot-farfosh.git
-cd telegram-bot-farfosh
-
-# 2. إنشاء ملف .env
 cp .env.example .env
+# Edit .env and add your BOT_TOKEN
+```
 
-# 3. تشغيل مع Docker Compose
+2. Run with Docker Compose:
+```bash
 docker-compose up -d
+```
 
-# لمراقبة السجلات:
-docker-compose logs -f
+3. View logs:
+```bash
+docker-compose logs -f telegram-bot
+```
 
-# لإيقاف البوت:
+4. Stop the bot:
+```bash
 docker-compose down
 ```
 
----
+## Configuration ⚙️
 
-## 📖 طريقة الاستخدام
+Edit `.env` file to configure:
 
-### خطوة 1: بدء البوت
-أرسل `/start` للبوت
+```bash
+# Required: Your bot token from BotFather
+BOT_TOKEN=YOUR_TOKEN_HERE
 
-```
-مرحبا هذا البوت تحت تطوير المطور كريم تفضل شوفني يساعدك 🎉
-```
-
-### خطوة 2: اختيار المنصة
-اضغط على أحد الأزرار الأربعة:
-- 📺 **يوتيوب**
-- 🎵 **تيك توك**
-- 📸 **انستغرام**
-- 𝕏 **تويتر**
-
-### خطوة 3: إرسال الرابط أو البحث
-
-**لليوتيوب:**
-- يمكنك إرسال رابط مباشر مثل: `https://youtube.com/watch?v=...`
-- أو البحث عن فيديو: `أغنية سعيدة`
-
-**للمنصات الأخرى:**
-- أرسل الرابط المباشر فقط
-
-### خطوة 4: اختيار صيغة التحميل (يوتيوب فقط)
-- 📹 **تحميل الفيديو**: يحمل الفيديو كاملاً
-- 🎵 **تحميل ملف صوتي**: يحمل الصوت فقط بصيغة MP3
-
----
-
-## ⚙️ التكوينات
-
-### متغيرات البيئة (.env)
-
-```env
-# توكن البوت (إلزامي)
-BOT_TOKEN=YOUR_BOT_TOKEN_HERE
-
-# الحد الأقصى لمدة فيديو يوتيوب بالدقائق (اختياري)
+# Optional: Maximum YouTube video duration in minutes
 MAX_YOUTUBE_MINUTES=30
+
+# Optional: Logging level
+LOG_LEVEL=INFO
 ```
 
+## Usage 💡
+
+1. Start the bot: `/start`
+2. Select your platform
+3. Send video link or search query (YouTube only)
+4. Choose download format
+5. Wait for the download to complete
+
+## Bot Commands 🎮
+
+- `/start` - Start bot and select platform
+- `/help` - Show help message
+- `/about` - Show bot information
+
+## Troubleshooting 🔧
+
+### Bot won't start
+- Check if BOT_TOKEN is correct in `.env`
+- Ensure BOT_TOKEN has no extra spaces
+- Verify internet connection
+
+### Download fails
+- Check if the link is valid
+- Ensure FFmpeg is installed
+- For YouTube: video should be less than 30 minutes
+- Check file size (max 50MB)
+
+### Docker issues
+- Rebuild image: `docker-compose build --no-cache`
+- Check logs: `docker-compose logs telegram-bot`
+- Ensure Docker and Docker Compose are installed
+
+## Supported Platforms 🌐
+
+| Platform | Status | Notes |
+|----------|--------|-------|
+| YouTube | ✅ | Supports search and direct links |
+| TikTok | ✅ | Requires valid link |
+| Instagram | ✅ | Supports posts and reels |
+| Twitter | ✅ | Requires valid link |
+
+## Limitations ⚠️
+
+- YouTube videos limited to 30 minutes
+- Maximum file size: 50MB
+- Automatic file deletion after sending
+- Requires stable internet connection
+
+## Performance 📊
+
+- Memory limit: 512MB
+- CPU limit: 1 core
+- Average download time: 10-30 seconds
+
+## Security 🔒
+
+- Bot token is kept secure in `.env` file
+- User data is not stored
+- Files are deleted automatically
+- No logging of user information
+
+## Developer 👨‍💻
+
+**Karim** - [@k60269212-dev](https://github.com/k60269212-dev)
+
+## License 📝
+
+MIT License - Feel free to use and modify
+
+## Support 💬
+
+For issues or questions:
+1. Check existing [GitHub Issues](https://github.com/k60269212-dev/telegram-bot-farfosh/issues)
+2. Create a new issue if needed
+3. Contact the developer
+
+## Changelog 📜
+
+### v1.1 (Latest)
+- ✅ Fixed Docker build errors
+- ✅ Updated dependencies
+- ✅ Improved error handling
+- ✅ Added health checks
+- ✅ Better logging
+- ✅ Code cleanup and optimization
+
+### v1.0
+- Initial release
+
 ---
 
-## 📁 هيكل المشروع
-
-```
-telegram-bot-farfosh/
-├── bot.py                 # ملف البوت الرئيسي
-├── requirements.txt        # المكتبات المطلوبة
-├── Dockerfile             # ملف Docker
-├── docker-compose.yml     # ملف Docker Compose
-├── .env.example          # مثال على متغيرات البيئة
-├── .gitignore            # الملفات المستثناة من Git
-├── README.md             # هذا الملف
-└── downloads/            # مجلد الملفات المحملة (تلقائي)
-```
-
----
-
-## 🔒 الأمان والخصوصية
-
-⚠️ **تحذير مهم:**
-
-1. **احم توكنك:** لا تشارك توكن البوت مع أي شخص
-2. **الملفات المحملة:** يتم حذف الملفات تلقائياً بعد الإرسال
-3. **الخصوصية:** لا يتم حفظ بيانات المستخدمين
-4. **الحقوق:** تأكد من امتلاك حق التحميل قبل تحميل أي محتوى
-
----
-
-## 🐛 استكشاف الأخطاء
-
-### المشكلة: البوت لا يستجيب
-**الحل:**
-- تأكد من أن التوكن صحيح في ملف .env
-- تحقق من اتصالك بالإنترنت
-- أعد تشغيل البوت: `python bot.py`
-
-### المشكلة: خطأ في FFmpeg
-**الحل:**
-- تثبيت FFmpeg: `sudo apt-get install ffmpeg` (Linux)
-- تثبيت FFmpeg: `brew install ffmpeg` (macOS)
-
-### المشكلة: فشل التحميل
-**الحل:**
-- تحقق من أن الرابط صحيح
-- تأكد من أن الفيديو ليس محمياً بكلمة مرور
-- للتفاصيل، انظر إلى سجلات البوت
-
----
-
-## 📚 المكتبات المستخدمة
-
-- **python-telegram-bot**: مكتبة التفاعل مع Telegram API
-- **yt-dlp**: تحميل الفيديوهات من المنصات المختلفة
-- **python-dotenv**: إدارة متغيرات البيئة
-- **ffmpeg-python**: معالجة الوسائط
-
----
-
-## 📞 الدعم والمساعدة
-
-إذا واجهت أي مشكلة:
-1. تحقق من [Issues](https://github.com/k60269212-dev/telegram-bot-farfosh/issues)
-2. أنشئ Issue جديد مع تفاصيل المشكلة
-
----
-
-## 📄 الترخيص
-
-هذا المشروع مرخص تحت MIT License
-
----
-
-**صُنع بـ ❤️ من قبل كريم**
+**Made with ❤️ by Karim**

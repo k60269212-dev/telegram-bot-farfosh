@@ -2,15 +2,28 @@ version: '3.8'
 
 services:
   telegram-bot:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: telegram_bot_farfosh
     environment:
       - BOT_TOKEN=${BOT_TOKEN}
+      - LOG_LEVEL=INFO
     volumes:
       - ./downloads:/app/downloads
-    restart: always
+      - ./bot.log:/app/bot.log
+    restart: unless-stopped
     networks:
       - bot-network
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
 
 networks:
   bot-network:
