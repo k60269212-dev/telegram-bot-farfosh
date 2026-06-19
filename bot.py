@@ -28,10 +28,10 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # الثوابت
-BOT_TOKEN = os.getenv('BOT_TOKEN', '8809949476:AAGbXnbKOilU7TK1JBzlG8kjfIRvJVq0Dao')
+BOT_TOKEN = os.getenv('BOT_TOKEN', '8890058021:AAFHJh1vWvTJ43847GpP__GFn9J4wcm0EFA')
 MAX_YOUTUBE_DURATION = 30 * 60  # 30 دقيقة بالثواني
 
-# قائمة المن��ات
+# قائمة المنصات
 PLATFORMS = {
     'youtube': {'emoji': '📺', 'name': 'يوتيوب'},
     'tiktok': {'emoji': '🎵', 'name': 'تيك توك'},
@@ -65,6 +65,60 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(f"المستخدم {user.id} بدأ البوت")
 
 
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """معالج أمر /help - عرض قائمة الأوامر"""
+    help_text = """
+📖 **قائمة الأوامر:**
+
+/start - بدء البوت والترحيب
+/help - عرض هذه الرسالة
+/about - معلومات عن البوت
+
+**كيفية الاستخدام:**
+1. اضغط /start لاختيار المنصة
+2. اختر المنصة المطلوبة (يوتيوب، تيك توك، انستغرام، تويتر)
+3. أرسل الرابط أو ابحث عن الفيديو (يوتيوب فقط)
+4. اختر صيغة التحميل المطلوبة
+
+✨ **ميزات البوت:**
+📺 تحميل من يوتيوب (فيديو أو صوتي)
+🎵 تيك توك
+📸 انستغرام
+𝕏 تويتر
+
+⚠️ **ملاحظات:**
+- حد أقصى لفيديو يوتيوب: 30 دقيقة
+- الملفات تُحذف تلقائياً بعد الإرسال
+    """
+    await update.message.reply_text(help_text, parse_mode='Markdown')
+
+
+async def about_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """معالج أمر /about - معلومات عن البوت"""
+    about_text = """
+👨‍💻 **بوت فرفوش - تحميل الفيديوهات والصوتيات**
+
+🔧 **مطور البوت:** كريم
+📱 **المنصات المدعومة:** يوتيوب، تيك توك، انستغرام، تويتر
+
+✨ **الميزات:**
+✅ تحميل فيديوهات يوتيوب (مع حد أقصى 30 دقيقة)
+✅ استخراج ملفات صوتية من يوتيوب
+✅ تحميل من منصات أخرى
+✅ واجهة تفاعلية وسهلة الاستخدام
+
+🛡️ **الأمان:**
+- التوكن محمي وآمن
+- الملفات تُحذف فوراً بعد الإرسال
+- لا يتم حفظ بيانات المستخدمين
+
+📝 **الترخيص:** MIT License
+
+💬 **للدعم والمساعدة:** تواصل مع المطور
+    """
+    await update.message.reply_text(about_text, parse_mode='Markdown')
+
+
 async def platform_button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """معالج ضغط أزرار المنصات"""
     query = update.callback_query
@@ -74,7 +128,7 @@ async def platform_button(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     context.user_data['platform'] = platform
     
     if platform == 'youtube':
-        message = "ابحث عن المقطع أو أرسل رابط الفيديو الذي تريده 🔍"
+        message = "ابحث عن المقطع أ�� أرسل رابط الفيديو الذي تريده 🔍"
     else:
         message = f"أرسل رابط {PLATFORMS[platform]['name']} المباشر 🔗"
     
@@ -381,7 +435,7 @@ def _is_valid_url(text: str) -> bool:
 
 
 async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """معالج الأخطاء"""
+    """مع��لج الأخطاء"""
     logger.error(f"حدث استثناء: {context.error}")
 
 
@@ -392,6 +446,8 @@ def main() -> None:
     
     # إضافة معالجات الأوامر
     application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("help", help_command))
+    application.add_handler(CommandHandler("about", about_command))
     
     # معالجات الأزرار
     application.add_handler(CallbackQueryHandler(platform_button, pattern='^platform_'))
